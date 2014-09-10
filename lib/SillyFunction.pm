@@ -11,6 +11,8 @@
 #
 package SillyFunction;
 
+$SillyFunction::VERSION = '0.1';
+
 sub group_products {
 my $products = shift;
 my %brand_type = ();

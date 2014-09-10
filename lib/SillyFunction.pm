@@ -1,3 +1,5 @@
+use warnings;
+use strict;
 #
 # Instructions
 #
@@ -13,21 +15,34 @@ package SillyFunction;
 
 sub group_products {
   my $products = shift;
+
+  my $brand_type = _build_unique_brand_type_hash($products);
+  return _build_sorted_brand_type_hash_array($brand_type);
+
+}
+
+sub _build_unique_brand_type_hash {
+  my $products = shift;
   my %brand_type = ();
-  my $grouped_products = ();
 
   foreach my $product (@$products)
   {
     $brand_type{$product->{brand}}{$product->{type}} = 1;
   }
-  foreach my $brand (sort keys %brand_type)
+  return \%brand_type;
+}
+
+sub _build_sorted_brand_type_hash_array {
+  my $brand_type = shift;
+  my @grouped_products = ();
+
+  foreach my $brand (sort keys %$brand_type)
   {
-    foreach my $type (sort keys %{$brand_type{$brand}})
+    foreach my $type (sort keys %{$brand_type->{$brand}})
     {
       push(@grouped_products, { brand => $brand, type => $type});
     }
   }
   return \@grouped_products;
 }
-
 1;

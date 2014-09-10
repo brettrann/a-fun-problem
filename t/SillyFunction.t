@@ -11,8 +11,10 @@ use Test::More;
 # { brand => $brand, type => $type } sorted by brand, then type
 
 # Assumption:
-# simply for context, assuming type is a subcategory and so including
-# name parameter just for context clues -- it is not used.
+# because the code creates a brand/type hash it is assumed
+# there will be duplicates, as this effectively removes them.
+# so, for context, will include a name key just for context clues
+# it is not used.
 
 my $products = [
   { brand => 'ACME', type => 'animal',  name => 'hen' },

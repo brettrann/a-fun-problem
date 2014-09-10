@@ -12,23 +12,22 @@
 package SillyFunction;
 
 sub group_products {
-my $products = shift;
-my %brand_type = ();
-my $grouped_products = [];
+  my $products = shift;
+  my %brand_type = ();
+  my $grouped_products = ();
 
-foreach (@{$products})
-{
-$brand_type{$_->{brand}} ||= {};
-$brand_type{$_->{brand}}->{$_->{type}} = 1;
-}
-foreach (sort keys %brand_type)
-{
-my $brand = $_;
-foreach (sort keys %{$brand_type{$brand}}) {
-push(@{$grouped_products}, { brand => $brand, type => $_});
-}
-}
-$grouped_products;
+  foreach my $product (@$products)
+  {
+    $brand_type{$product->{brand}}{$product->{type}} = 1;
+  }
+  foreach my $brand (sort keys %brand_type)
+  {
+    foreach my $type (sort keys %{$brand_type{$brand}})
+    {
+      push(@grouped_products, { brand => $brand, type => $type});
+    }
+  }
+  return \@grouped_products;
 }
 
 1;

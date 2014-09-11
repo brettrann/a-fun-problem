@@ -1,0 +1,5 @@
+Build.PL
+lib/SillyFunction.pm
+MANIFEST			This list of files
+README
+t/SillyFunction.t

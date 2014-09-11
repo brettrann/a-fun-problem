@@ -24,13 +24,14 @@ my $products = [
   { brand => 'ACME', type => 'weapon',  name => 'disintegrating pistol' },
   { brand => 'ACME', type => 'animal',  name => 'bumble bees' },
   { brand => 'EMCA', type => 'weapon',  name => 'integrating pistol' },
-  { brand => 'ACME', type => 'animal',  name => 'water pistol' }
+  { brand => 'EMCA', type => 'animal',  name => 'chicken' }
 ];
 
 my $expects = [
   { brand => 'ACME', type => 'animal' },
   { brand => 'ACME', type => 'pill'   },
   { brand => 'ACME', type => 'weapon' },
+  { brand => 'EMCA', type => 'animal' },
   { brand => 'EMCA', type => 'weapon' },
 ];
 

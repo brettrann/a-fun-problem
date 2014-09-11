@@ -62,9 +62,6 @@ Brett Rann <brettrann@gmail.com>
 https://github.com/infoxchange/a-fun-problem
 =cut
 
-
-
-
 package SillyFunction;
 
 use warnings;

@@ -9,6 +9,62 @@
 # If you prefer a different language, you can provide your solution in PHP, 
 # Python or Javascript too.
 #
+
+=head1 NAME
+
+SillyFunction - a "fun" exercise
+
+=head1 SYNOPSIS
+
+  use SillyFunction qw(:all);
+  $sorted_and_unique_brand_type = group_products($products);
+
+=head1 DESCRIPTION
+
+Takes an array referece of hash references expecting at least
+keys of brand and type. Will return a unique array reference of
+hashes with just brand and type keys, sorted by brand then type.
+
+=head1 EXAMPLE
+
+  use SillyFunction qw(:all);
+  use Data::Dumper qw(Dumper);
+
+  my $products = [
+    { brand => "EMCA", type => 'cushion', ... },
+    { brand => "ACME", type => 'cushion', ... },
+    { brand => "ACME", type => 'animal',  ... },
+    { brand => "ACME", type => 'animal',  ... },
+  ];
+
+  print Dumper( group_products($products );
+  >> $VAR1 = [
+            {
+              'brand' => 'ACME',
+              'type' => 'animal'
+            },
+            {
+              'brand' => 'ACME',
+              'type' => 'cushion'
+            },
+            {
+              'brand' => 'EMCA',
+              'type' => 'cushion'
+            }
+          ];
+
+=head1 AUTHOR
+
+Brett Rann <brettrann@gmail.com>
+
+=head1 SEE ALSO
+
+https://github.com/infoxchange/a-fun-problem
+=cut
+
+
+
+
 package SillyFunction;
 
 use warnings;

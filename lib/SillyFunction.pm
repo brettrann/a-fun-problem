@@ -21,32 +21,29 @@ our %EXPORT_TAGS = ( all => \@EXPORT_OK );
 sub group_products {
   my $products = shift;
 
-  my $brand_type = _build_unique_brand_type_hash($products);
-  return _build_sorted_brand_type_hash_array($brand_type);
+  my $brand_type = _build_unique_brand_type_array($products);
+  my $sorted =  _build_sorted_brand_type_hash_array($brand_type);
+  return $sorted;
 }
 
-sub _build_unique_brand_type_hash {
+sub _build_unique_brand_type_array {
   my $products = shift;
-  my %brand_type = ();
+  my %seen = ();
 
-  foreach my $product (@$products)
-  {
-    $brand_type{$product->{brand}}{$product->{type}} = 1;
-  }
-  return \%brand_type;
+  my @uniq_sorted =
+      grep { not $seen{ $_->{brand} }{ $_->{type} }++ }
+      map { { brand => $_->{brand}, type => $_->{type} } }
+      @$products;
+
+  return \@uniq_sorted;
 }
 
 sub _build_sorted_brand_type_hash_array {
   my $brand_type = shift;
-  my @grouped_products = ();
+  my @sorted =
+    sort { $a->{brand} cmp $b->{brand} or $a->{type} cmp $b->{type} }
+    @$brand_type;
 
-  foreach my $brand (sort keys %$brand_type)
-  {
-    foreach my $type (sort keys %{$brand_type->{$brand}})
-    {
-      push(@grouped_products, { brand => $brand, type => $type});
-    }
-  }
-  return \@grouped_products;
+  return \@sorted;
 }
 1;

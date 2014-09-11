@@ -1,8 +1,8 @@
 use strict;
 use warnings;
-use Test::More;
+use Test::More tests => 2;
 
-{ use_ok('SillyFunction', qw(:all)) || BAIL_OUT "can't use SillyFunction" }
+BEGIN { use_ok('SillyFunction', qw(:all)) || BAIL_OUT "can't use SillyFunction" }
 
 # SillyFunction::group_products
 # takes an array reference of product hash references
@@ -37,5 +37,3 @@ my $expects = [
 my $result = group_products($products);
 
 is_deeply($result, $expects, 'group_products return value') or diag explain $result;
-
-done_testing;

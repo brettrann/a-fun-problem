@@ -20,30 +20,13 @@ our %EXPORT_TAGS = ( all => \@EXPORT_OK );
 
 sub group_products {
   my $products = shift;
-
-  my $brand_type = _build_unique_brand_type_array($products);
-  my $sorted =  _build_sorted_brand_type_hash_array($brand_type);
-  return $sorted;
-}
-
-sub _build_unique_brand_type_array {
-  my $products = shift;
   my %seen = ();
 
-  my @uniq_sorted =
-      grep { not $seen{ $_->{brand} }{ $_->{type} }++ }
-      map { { brand => $_->{brand}, type => $_->{type} } }
-      @$products;
-
-  return \@uniq_sorted;
-}
-
-sub _build_sorted_brand_type_hash_array {
-  my $brand_type = shift;
-  my @sorted =
+  my @uniq_on_brand_and_type_then_sorted =
     sort { $a->{brand} cmp $b->{brand} or $a->{type} cmp $b->{type} }
-    @$brand_type;
-
-  return \@sorted;
+    grep { not $seen{ $_->{brand} }{ $_->{type} }++ } # remove duplicates
+    map { { brand => $_->{brand}, type => $_->{type} } } # remove unwanted keys
+    @$products;
+  return \@uniq_on_brand_and_type_then_sorted;
 }
 1;

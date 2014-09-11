@@ -1,5 +1,3 @@
-use warnings;
-use strict;
 #
 # Instructions
 #
@@ -13,12 +11,18 @@ use strict;
 #
 package SillyFunction;
 
+use warnings;
+use strict;
+
+use Exporter 'import';
+our @EXPORT_OK = qw( group_products );
+our %EXPORT_TAGS = ( all => \@EXPORT_OK );
+
 sub group_products {
   my $products = shift;
 
   my $brand_type = _build_unique_brand_type_hash($products);
   return _build_sorted_brand_type_hash_array($brand_type);
-
 }
 
 sub _build_unique_brand_type_hash {
